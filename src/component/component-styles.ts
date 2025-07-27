@@ -159,9 +159,9 @@ export const TableWrapper = styled.div`
     z-index: 0;
 
     tr th {
-      background-color: #e0f0f8 !important;
+      background-color: #eeecec !important;
       text-transform: capitalize;
-      color: #047bba !important;
+      color: #000 !important;
       font-size: 14px;
       font-weight: 600 !important;
       padding-top: 10px !important;
@@ -179,7 +179,7 @@ export const TableWrapper = styled.div`
 
   td {
     padding-left: 15px !important;
-    color: #050e21;
+    color: #222222;
     font-size: 15px;
     font-weight: 400;
     height: 40px;
@@ -197,9 +197,9 @@ export const TableWrapper = styled.div`
     border: 1px solid #edf0f4 !important;
     height: 6.34vh !important;
 
-    &:nth-child(even) {
-      background: rgba(196, 196, 196, 0.12);
-    }
+    // &:nth-child(even) {
+    //   background: rgba(196, 196, 196, 0.12);
+    // }
 
     &:hover {
       background-color: #f5f5f5;

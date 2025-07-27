@@ -1,4 +1,3 @@
-import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -28,15 +27,15 @@ const Pagination = (props: PaginationProps) => {
 
   return (
     <div className="fixed bottom-4 right-20 pt-2 mr-4">
-      <div className="flex bg-white rounded-lg shadow px-2 py-1 space-x-1">
+      <div className="flex  px-2 py-1 space-x-1">
         {/* Previous */}
         <button
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
           className={`px-2 py-1 rounded ${
             currentPage === 1
-              ? "text-gray-400"
-              : "text-gray-600 hover:bg-gray-200"
+              ? "text-gray-400 bg-gray-200"
+              : "text-gray-600 bg-white"
           }`}
         >
           <IoIosArrowBack />
@@ -51,8 +50,8 @@ const Pagination = (props: PaginationProps) => {
               num === currentPage
                 ? "bg-[#448ef7] text-white"
                 : num === "..."
-                ? "text-gray-500 cursor-default"
-                : "text-gray-600 hover:bg-gray-200"
+                ? "text-gray-500 cursor-default bg-white"
+                : "text-gray-600 bg-white"
             }`}
             disabled={num === "..."}
           >
@@ -66,8 +65,8 @@ const Pagination = (props: PaginationProps) => {
           onClick={() => onPageChange(currentPage + 1)}
           className={`px-2 py-1 rounded ${
             currentPage === totalPages
-              ? "text-gray-400"
-              : "text-gray-600 hover:bg-gray-200"
+              ? "text-gray-400 bg-gray-200"
+              : "text-gray-600 bg-white"
           }`}
         >
           <IoIosArrowForward />

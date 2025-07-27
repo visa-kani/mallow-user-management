@@ -66,22 +66,20 @@ export const UserManagement = () => {
 
   useEffect(() => {
     setLoader(true);
-    dispatch(
-      GetUserData({ per_page: perPage, page: page, search: searchValue })
-    ).then((res: any) => {
-      setLoader(false);
-    });
+    dispatch(GetUserData({ per_page: perPage, page: page })).then(
+      (res: any) => {
+        setLoader(false);
+      }
+    );
   }, [page, perPage, searchValue, dispatch]);
 
   // Debounce callback
-  const debounced = useDebouncedCallback(
-    // function
-    (value) => {
-      setSearchValue(value);
-    },
-    // delay in ms
-    1000
-  );
+  // const debounced = useDebouncedCallback(
+  //   (value) => {
+  //     setSearchValue(value);
+  //   },
+  //   1000
+  // );
 
   const searchIcon = FiSearch({}) as JSX.Element;
   const tableIcon = BiTable({}) as JSX.Element;
@@ -97,7 +95,18 @@ export const UserManagement = () => {
     setHovered((prev) => ({ value: !prev.value, id: id }));
   };
 
-  const userTableData = userData?.data?.map((item: selectedUserType) => {
+  const filterData =
+    search !== ""
+      ? userData?.data?.filter((item: selectedUserType) => {
+          return (
+            item?.first_name.toLowerCase().includes(search.toLowerCase()) ||
+            item?.last_name.toLowerCase().includes(search.toLowerCase()) ||
+            item?.email.toLowerCase().includes(search.toLowerCase())
+          );
+        })
+      : userData?.data;
+
+  const userTableData = filterData?.map((item: selectedUserType) => {
     return item;
   });
 
@@ -232,7 +241,7 @@ export const UserManagement = () => {
               leftIcon={searchIcon}
               value={search}
               onChange={(e) => {
-                debounced(e.target.value);
+                // debounced(e.target.value);
                 setSearch(e.target.value);
               }}
             />
@@ -252,7 +261,7 @@ export const UserManagement = () => {
           </div>
         ) : dataView === "list" ? (
           <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 p-5">
-            {userData?.data?.map((item: any) => {
+            {filterData?.map((item: any) => {
               const firstName = item.first_name ? item.first_name : "";
               const lastName = item.last_name ? item.last_name : "";
               const userName = firstName + " " + lastName;

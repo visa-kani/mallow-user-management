@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 // ************************** Reusable Components ***********************
+import { getUserData, setUserData } from "../../utils/common";
 import { Input } from "../../component/form-elements/input";
 import { Button } from "../../component/button";
 // ************************** Icons *************************************
@@ -12,8 +13,8 @@ import { LoginWrapper } from "../pages-styles";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { getUserData, setUserData } from "../../utils/common";
 import toast from "react-hot-toast";
+// ************************** Redux *************************************
 import { AppDispatch } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { LoginUser } from "../../redux/slice/loginSlice";
@@ -43,8 +44,34 @@ export const Login = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Email is required")
+      .trim(),
+
+    password: Yup.string()
+      .required("Password is required")
+      .trim()
+      .test(
+        "password-strength",
+        "Password must be at least 8 characters",
+        (value) => !!value && value.length >= 8
+      )
+      .test(
+        "password-letter",
+        "Password must contain at least one letter (a-z or A-Z)",
+        (value) => !!value && /[a-zA-Z]/.test(value)
+      )
+      .test(
+        "password-number",
+        "Password must contain at least one number (0-9)",
+        (value) => !!value && /[0-9]/.test(value)
+      )
+      .test(
+        "password-special-char",
+        "Password must contain at least one special character (!@#$%^&* etc)",
+        (value) => !!value && /[!@#$%^&*(),.?":{}|<>]/.test(value)
+      ),
   });
 
   const onSubmit = (values: FormData) => {
