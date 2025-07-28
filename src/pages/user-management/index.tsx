@@ -17,7 +17,6 @@ import Modal from "../../component/modal";
 import { FiSearch } from "react-icons/fi";
 import { BiTable } from "react-icons/bi";
 import { IoList } from "react-icons/io5";
-import { ImSwitch } from "react-icons/im";
 // ************************** Pages ************************************
 import { UserForm } from "./user-form";
 // ************************** Packages *********************************
@@ -37,9 +36,8 @@ import { useSelector } from "react-redux";
 import Pagination from "../../component/pagination";
 import { NoRecordsWrapper } from "../../component/component-styles";
 import noRecords from "../../assets/images/norecordfound.png";
-import { useDebouncedCallback } from "use-debounce";
-import { removeUserData } from "../../utils/common";
-import { useNavigate } from "react-router-dom";
+import { Header } from "../../container/header";
+// import { useDebouncedCallback } from "use-debounce";
 
 export const UserManagement = () => {
   const [dataView, setDataView] = useState<string>("list");
@@ -62,7 +60,6 @@ export const UserManagement = () => {
   const userData = useSelector((store: any) => store.userDetails.userData);
   const [btnLoader, setBtnLoader] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoader(true);
@@ -84,7 +81,6 @@ export const UserManagement = () => {
   const searchIcon = FiSearch({}) as JSX.Element;
   const tableIcon = BiTable({}) as JSX.Element;
   const listIcon = IoList({}) as JSX.Element;
-  const logOutIcon = ImSwitch({}) as JSX.Element;
 
   const handleOpenModal = (item: selectedUserType | any, type: string) => {
     setOpenModal((prev) => ({ value: !prev.value, type: type }));
@@ -178,19 +174,8 @@ export const UserManagement = () => {
 
   return (
     <div className="bg-[#f2f2f2] sm:h-[100vh] h-auto">
+      <Header />
       <div className="container sm:w-[90%] w-[95%] m-auto">
-        <div className="text-lg font-semibold px-5 pt-4 flex justify-end">
-          <div
-            onClick={() => {
-              removeUserData();
-              window.location.href = "/";
-              navigate("/");
-            }}
-            className="flex items-center gap-2 cursor-pointer text-[#f44336]"
-          >
-            {logOutIcon} Logout
-          </div>
-        </div>
         <div className="text-2xl font-semibold px-5 pt-1">Users</div>
         <div className="sm:flex block justify-between items-center">
           <div className="border-solid border-[2px] border-[#448ef7] mx-5 mt-2 inline-block px-3 rounded-lg">
