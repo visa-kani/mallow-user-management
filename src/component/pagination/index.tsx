@@ -26,7 +26,7 @@ const Pagination = (props: PaginationProps) => {
   }
 
   return (
-    <div className="fixed bottom-4 right-20 pt-2 mr-4">
+    <div className="sm:fixed bottom-4 right-20 pt-2 mr-4">
       <div className="flex  px-2 py-1 space-x-1">
         {/* Previous */}
         <button

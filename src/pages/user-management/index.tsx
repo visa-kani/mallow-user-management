@@ -179,7 +179,7 @@ export const UserManagement = () => {
   return (
     <div className="bg-[#f2f2f2] sm:h-[100vh] h-auto">
       <div className="container sm:w-[90%] w-[95%] m-auto">
-        <div className="text-lg font-semibold px-5 pt-8 fixed -top-5 right-6">
+        <div className="text-lg font-semibold px-5 pt-4 flex justify-end">
           <div
             onClick={() => {
               removeUserData();
@@ -191,7 +191,7 @@ export const UserManagement = () => {
             {logOutIcon} Logout
           </div>
         </div>
-        <div className="text-2xl font-semibold px-5 pt-8">Users</div>
+        <div className="text-2xl font-semibold px-5 pt-1">Users</div>
         <div className="sm:flex block justify-between items-center">
           <div className="border-solid border-[2px] border-[#448ef7] mx-5 mt-2 inline-block px-3 rounded-lg">
             <div className="flex items-center gap-2 cursor-pointer">
